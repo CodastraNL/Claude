@@ -290,8 +290,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .pcard__media .slime-art{display:flex;flex-direction:column;align-items:center}
 .pcard__media .slime-art .mini-tag{font-family:var(--font-pixel);font-size:11px;background:rgba(0,0,0,.55);padding:7px 9px 6px;border-radius:2px;margin-bottom:10px}
 .pcard__media .slime-art svg{width:96px;height:96px}
-.pcard__media .slime-art.multi{flex-direction:row;gap:6px;align-items:flex-end}
-.pcard__media .slime-art.multi svg{width:58px;height:58px}
+.pcard__media .slime-art.multi{flex-direction:row;gap:4px;align-items:flex-end}
+.pcard__media .slime-art.multi svg{width:50px;height:50px}
 .feats{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:6px}
 .feats li{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:var(--ink-2);line-height:1.45}
 .feats li::before{content:"";flex:none;width:8px;height:8px;margin-top:5px;background:var(--green-light);box-shadow:inset -2px -2px 0 rgba(0,0,0,.25)}

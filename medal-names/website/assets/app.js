@@ -70,40 +70,55 @@
     word: { label: "WORD", cls: "badge-sky", glow: "rgba(94,197,232,.20)" },
   };
 
+  /* Account pricing (EUR): base account + extras, minus 10% when combined */
+  const ACCOUNT_EUR = 12;           // one fresh full access account
+  const COMBO_DISCOUNT = 0.10;      // 10% off any combination
+  const EXTRA_EUR = {               // cape prices as on medalcapes.com (USD / 1.10)
+    builder: 1.50, aurora: 0.75, hero: 35.00, moonlight: 86.36, tiktok: 272.73,
+    vip: 5.00,                      // MedalMC lifetime VIP rank (placeholder price)
+  };
+  const r2 = v => Math.round(v * 100) / 100;
+  function priced(a) {
+    const list = r2(ACCOUNT_EUR * (a.qty || 1) + (a.extras || []).reduce((t, k) => t + EXTRA_EUR[k], 0));
+    const combo = (a.qty || 1) > 1 || (a.extras || []).length > 0;
+    return Object.assign(a, combo ? { price: r2(list * (1 - COMBO_DISCOUNT)), old: list } : { price: list });
+  }
+
   const ACCOUNTS = [
-    { id: "a-fresh", title: "Fresh account", cat: "fresh", price: 24.95, stock: 38, art: "slime", tag: "Player123",
+    { id: "a-fresh", title: "Fresh account", cat: "fresh", stock: 38, art: "slime", tag: "Player123",
       desc: "Brand-new full access account with a random name.",
       feats: ["Java & Bedrock", "Name change available right away", "Email and password changeable"] },
-    { id: "a-fresh5", title: "Fresh account × 5", cat: "fresh", price: 109.95, old: 124.75, stock: 12, art: "multi",
-      desc: "Five fresh accounts for alts, events or your team.",
+    { id: "a-fresh5", title: "Fresh account × 5", cat: "fresh", qty: 5, stock: 12, art: "multi",
+      desc: "Five fresh accounts for alts, events or your team. 10% off.",
       feats: ["5 × Java & Bedrock", "Name change available on each", "Delivered in one order"] },
-    { id: "a-builder", title: "Account + Builder Cape", cat: "cape", price: 34.95, stock: 21, art: "capes/builder-cape.png",
+    { id: "a-builder", title: "Account + Builder Cape", cat: "cape", extras: ["builder"], stock: 21, art: "capes/builder-cape.png",
       desc: "Fresh account with the Builder Cape already redeemed.",
       feats: ["Builder Cape active", "Name change available", "Java & Bedrock"] },
-    { id: "a-aurora", title: "Account + Aurora Cape", cat: "cape", price: 74.95, stock: 9, art: "capes/aurora-cape.png",
+    { id: "a-aurora", title: "Account + Aurora Cape", cat: "cape", extras: ["aurora"], stock: 9, art: "capes/aurora-cape.png",
       desc: "Fresh account with the shimmering Aurora Cape.",
       feats: ["Aurora Cape active", "Name change available", "Java & Bedrock"] },
-    { id: "a-moon", title: "Account + Moonlight Trail Cape", cat: "cape", price: 124.95, stock: 4, art: "capes/moonlight-trail-cape.png",
+    { id: "a-moon", title: "Account + Moonlight Trail Cape", cat: "cape", extras: ["moonlight"], stock: 4, art: "capes/moonlight-trail-cape.png",
       desc: "Fresh account with the deep blue Moonlight Trail Cape.",
       feats: ["Moonlight Trail Cape active", "Name change available", "Java & Bedrock"] },
-    { id: "a-tiktok", title: "Account + TikTok Cape", cat: "cape", price: 319, old: 349, stock: 2, art: "capes/tiktok-cape.png",
+    { id: "a-tiktok", title: "Account + TikTok Cape", cat: "cape", extras: ["tiktok"], stock: 2, art: "capes/tiktok-cape.png",
       desc: "Fresh account with the rare black TikTok Cape.",
       feats: ["TikTok Cape active", "Name change available", "Java & Bedrock"] },
-    { id: "a-vip", title: "MedalMC VIP account", cat: "bundle", price: 39.95, stock: 25, art: "slime", tag: "VIP",
+    { id: "a-vip", title: "MedalMC VIP account", cat: "bundle", extras: ["vip"], stock: 25, art: "slime", tag: "VIP",
       desc: "Fresh account with a lifetime VIP rank on MedalMC Network.",
       feats: ["Lifetime VIP on play.medalmc.com", "Name change available", "Java & Bedrock"] },
-    { id: "a-starter", title: "Starter bundle", cat: "bundle", price: 59.95, old: 74.90, stock: 15, art: "capes/hero-cape.png",
+    { id: "a-starter", title: "Starter bundle", cat: "bundle", extras: ["hero", "vip"], stock: 15, art: "capes/hero-cape.png",
       desc: "Account with Hero Cape plus lifetime MedalMC VIP. The full Medal package.",
       feats: ["Hero Cape active", "Lifetime MedalMC VIP", "Name change available"] },
-  ];
+  ].map(priced);
   const ACAT = { fresh: { label: "FRESH", cls: "badge-green" }, cape: { label: "CAPE", cls: "badge-gold" }, bundle: { label: "BUNDLE", cls: "badge-purple" } };
 
   const byId = id => NAMES.find(x => x.id === id) || ACCOUNTS.find(x => x.id === id);
   const itemTitle = x => x.n || x.title;
 
   /* ---------- currency ---------- */
-  let currency = store.get("mn-currency", "USD");
-  const RATE = { USD: 1, EUR: 0.92 }, SYM = { USD: "US$", EUR: "€" };
+  // prices are stored in EUR; USD uses the same rate as MedalCapes
+  let currency = store.get("mn-currency2", "EUR");
+  const RATE = { EUR: 1, USD: 1.10 }, SYM = { USD: "US$", EUR: "€" };
   const fmt = v => SYM[currency] + (v * RATE[currency]).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const kfmt = v => v >= 1000 ? (v / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(v);
 
@@ -122,8 +137,8 @@
     </ul>
     <div class="nav__actions">
       <select class="select" id="currency" aria-label="Currency">
-        <option value="USD"${currency === "USD" ? " selected" : ""}>$ USD</option>
         <option value="EUR"${currency === "EUR" ? " selected" : ""}>€ EUR</option>
+        <option value="USD"${currency === "USD" ? " selected" : ""}>$ USD</option>
       </select>
       <a class="nav__icon nav__discord" href="#" aria-label="Discord">${discordIcon()}</a>
       <a class="nav__icon" href="#" data-toast="Sign in is coming soon (demo)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span class="nav__label">Sign in</span></a>
@@ -202,7 +217,7 @@
 
   function accountArt(x) {
     if (x.art === "slime") return `<div class="slime-art"><span class="mini-tag">${x.tag}</span>${slime()}</div>`;
-    if (x.art === "multi") return `<div class="slime-art multi">${slime()}${slime()}${slime()}</div>`;
+    if (x.art === "multi") return `<div class="slime-art multi">${slime().repeat(x.qty || 5)}</div>`;
     return `<img src="assets/${x.art}" alt="" loading="lazy">`;
   }
   function accountCard(x) {
@@ -267,7 +282,7 @@
 
   const rerender = [];
   document.getElementById("currency").addEventListener("change", e => {
-    currency = e.target.value; store.set("mn-currency", currency);
+    currency = e.target.value; store.set("mn-currency2", currency);
     renderCart(); rerender.forEach(f => f());
     document.querySelectorAll("[data-price]").forEach(el => el.textContent = fmt(+el.dataset.price));
   });
