@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=2">
+<link rel="stylesheet" href="assets/street.css?v=4">
 </head>
 <body>
 
@@ -42,38 +43,76 @@
 </header>
 
 <main id="top">
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero__bg"></div>
-    <div class="hero__grid-bg"></div>
-    <canvas id="particles" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <div class="hero__inner">
-        <div>
-          <span class="chip chip--gold reveal">MedalMC · MedalCapes · MedalNames<span class="tri"><i style="background:#5cb43a"></i><i style="background:#ffc21a"></i><i style="background:#2a9fd6"></i></span></span>
-          <h1 class="reveal d1">One network.<br>Three brands.<br><span class="grad-gold">Built to win.</span></h1>
-          <p class="lead reveal d2">Medal Network is home to everything a Minecraft player needs: a place to play, a cape to show off and a name to be known by. One team, one community, one standard of quality.</p>
-          <div class="ipbox reveal d3">
-            <a class="btn btn-gold btn-lg" href="#brands">Explore our brands</a>
-            <a class="btn btn-ghost btn-lg" href="#partners">Partner with us</a>
-          </div>
-        </div>
-        <div class="stage" aria-hidden="true">
-          <div class="stage__ring stage__ring--2"></div>
-          <div class="stage__ring"></div>
-          <div class="stage__glow"></div>
-          <img class="stage__medal" src="assets/network-icon.svg" alt="">
-          <div class="float-card" style="top:6%;left:-2%;animation-delay:-1s"><span class="ico"><img src="assets/mc-icon.svg" alt="" width="30" height="30"></span><div><small>MedalMC</small><b><span data-live="mc">2,481</span><i>online</i></b></div></div>
-          <div class="float-card" style="top:44%;right:-4%;animation-delay:-3s"><span class="ico"><img src="assets/cape.png" alt="" width="34" height="34"></span><div><small>MedalCapes</small><b>6 capes<i>in stock</i></b></div></div>
-          <div class="float-card" style="bottom:4%;left:4%;animation-delay:-2s"><span class="ico"><img src="assets/names-icon.svg" alt="" width="30" height="30"></span><div><small>MedalNames</small><b>20<i>names &amp; accounts</i></b></div></div>
-        </div>
+  <!-- HERO: the Medal street at night -->
+  <section class="street" id="street" aria-label="Medal Network street">
+    <div class="scene">
+      <canvas class="bg" aria-hidden="true"></canvas>
+
+      <!-- lights -->
+      <span class="glow glow--door flicker" data-box="140 70 120 130"></span>
+      <span class="glow glow--warm flicker" data-box="128 66 44 44" style="animation-delay:-1.3s"></span>
+      <span class="glow glow--warm flicker" data-box="228 66 44 44" style="animation-delay:-2.2s"></span>
+      <span class="strip strip--cyan" data-box="0 95 128 1"></span>
+      <span class="strip strip--green" data-box="272 95 128 1" style="animation-delay:-2s"></span>
+
+      <!-- hanging medal + main neon sign -->
+      <div class="medal" data-box="186 4 28 28" data-sway="1.8 1.3 4.5 0"><img src="assets/network-icon.svg" alt=""></div>
+      <div class="marquee" data-box="140 32 120 40">
+        <span class="marquee__word">MEDAL</span>
+        <span class="marquee__pill neonflick">NETWORK</span>
       </div>
 
-      <div class="stats reveal">
-        <div class="stat"><b data-count="184320">184,320</b><span>Players reached</span></div>
-        <div class="stat"><b data-count="27940">27,940</b><span>Orders delivered</span></div>
-        <div class="stat"><b data-count="42150">42,150</b><span>Community members</span></div>
-        <div class="stat"><b>3</b><span>Brands, one team</span></div>
+      <!-- left: MedalCapes neon board, MedalMC hanging banner -->
+      <div class="sign" data-box="12 34 64 54"><a class="board neonflick" href="https://medalcapes.com" style="--neon:#ffc21a;--halo:rgba(255,160,30,.75);--ink-neon:#ffe58a"><img src="assets/cape.png" alt=""><b>MEDAL CAPES</b><small>CAPE CODES</small></a></div>
+      <span class="bracket" data-box="86 36 36 2"></span>
+      <div class="sign" data-box="92 40 26 56" data-sway="2.2 1.6 5.5 1.2" data-flutter><a class="banner" href="https://medalmc.com" style="--cloth:#16301a;--trim:#5cb43a;--halo:rgba(92,180,58,.7);--ink-neon:#c8ff9a"><span class="ropes"></span><img src="assets/mc-icon.svg" alt=""><b>MEDAL<br>MC</b><small>SERVERS</small></a></div>
+
+      <!-- right: MedalNames hanging banner, server status board -->
+      <span class="bracket" data-box="278 36 36 2" style="transform:scaleX(-1)"></span>
+      <div class="sign" data-box="282 40 26 56" data-sway="2.2 1.5 5.5 2.6" data-flutter><a class="banner" href="https://medalnames.com" style="--cloth:#10263a;--trim:#2a9fd6;--halo:rgba(94,197,232,.7);--ink-neon:#bff3ff"><span class="ropes"></span><img src="assets/names-icon.svg" alt=""><b>MEDAL<br>NAMES</b><small>NAMES &amp; ACCOUNTS</small></a></div>
+      <div class="sign" data-box="324 34 66 54"><a class="board" href="https://medalmc.com" style="--neon:#5cb43a;--halo:rgba(92,180,58,.7);--ink-neon:#c8ff9a"><span class="row"><span class="dotlive"></span><b>SERVER ONLINE</b></span><span class="big" data-live="mc">2,481</span><small>PLAYERS · PLAY.MEDALMC.COM</small></a></div>
+
+      <!-- shop windows -->
+      <div class="shopwin" data-box="20 118 100 46"><a href="https://medalcapes.com" aria-label="MedalCapes"><img src="assets/cape.png" alt=""><img src="assets/cape-aurora.png" alt=""><img src="assets/cape-tiktok.png" alt=""></a></div>
+      <div class="shopwin" data-box="280 118 100 46"><a href="https://medalnames.com" aria-label="MedalNames" style="display:flex;width:100%;justify-content:space-around;align-items:flex-end"><span class="tag">Ace</span><span class="tag">Kai</span><span class="tag">Nova</span></a></div>
+
+      <!-- lanterns -->
+      <span class="lantern flicker" data-box="144 80 10 13" data-lantern></span>
+      <span class="lantern flicker" data-box="246 80 10 13" data-lantern style="animation-delay:-1.7s"></span>
+
+      <!-- the door -->
+      <button class="door" type="button" data-box="165 80 70 102" aria-label="Open the door and enter Medal Network">
+        <span class="door__in"></span>
+        <span class="leaf leaf--l"><span class="band" style="top:14%"></span><span class="band" style="top:78%"></span><span class="win"></span><span class="handle"></span></span>
+        <span class="leaf leaf--r"><span class="band" style="top:14%"></span><span class="band" style="top:78%"></span><span class="win"></span><span class="handle"></span></span>
+      </button>
+
+      <!-- copy -->
+      <div class="callout" data-box="110 86 180 22"><h1>Step into the Medal Network</h1><p>Servers, capes and names. All in one place.</p></div>
+      <div class="enter" data-box="172 130 56 22"><span data-hand></span><b>CLICK THE DOOR</b><small>TO ENTER</small></div>
+
+      <!-- street life -->
+      <div class="aframe" data-box="326 150 36 42" data-sway="0.6 2.2 1.6 0.4"><a href="https://medalnames.com"><img src="assets/names-icon.svg" alt=""><b>OG NAMES<br>LIMITED!</b></a></div>
+      <span class="slime" data-box="368 178 18 18" data-slime></span>
+      <div class="hero-char" data-box="150 158 31 58" data-char></div>
+
+      <span class="fog fog--2"></span>
+      <span class="fog fog--1"></span>
+      <canvas class="fx" aria-hidden="true"></canvas>
+      <span class="flash"></span>
+    </div>
+
+    <div class="street__bar">
+      <div class="wrap">
+        <div class="street__brands" style="grid-column:1/-1">
+          <a href="https://medalmc.com" style="--c:#5cb43a">MEDALMC</a>
+          <a href="https://medalcapes.com" style="--c:#ffc21a">MEDALCAPES</a>
+          <a href="https://medalnames.com" style="--c:#2a9fd6">MEDALNAMES</a>
+        </div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="#ffc21a" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5L17 22l-5-3-5 3 1.5-8.5"/></svg><div><b>3 brands, 1 network</b><span>Servers, capes and names</span></div></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="#5ec5e8" stroke-width="2" aria-hidden="true"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg><div><b>Instant delivery</b><span>Codes and logins in seconds</span></div></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="#8fe076" stroke-width="2" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Safe and secure</b><span>Mollie and Stripe payments</span></div></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="#b48cff" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg><div><b>24/7 support</b><span>One Discord for every brand</span></div></div>
       </div>
     </div>
   </section>
@@ -227,5 +266,6 @@
 
 <div class="toast" id="toast" role="status"></div>
 <script src="assets/app.js?v=2"></script>
+<script src="assets/street.js?v=3"></script>
 </body>
 </html>
