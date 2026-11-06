@@ -15,6 +15,7 @@
   /* ---------- round flags (30x30, clipped to a circle) ---------- */
   const F = {
     gb: '<rect width="30" height="30" fill="#012169"/><path d="M0 0L30 30M30 0L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0L30 30M30 0L0 30" stroke="#C8102E" stroke-width="2.4"/><path d="M15 0V30M0 15H30" stroke="#fff" stroke-width="10"/><path d="M15 0V30M0 15H30" stroke="#C8102E" stroke-width="6"/>',
+    us: '<rect width="30" height="30" fill="#B22234"/><rect y="2.31" width="30" height="2.31" fill="#fff"/><rect y="6.92" width="30" height="2.31" fill="#fff"/><rect y="11.54" width="30" height="2.31" fill="#fff"/><rect y="16.15" width="30" height="2.31" fill="#fff"/><rect y="20.77" width="30" height="2.31" fill="#fff"/><rect y="25.38" width="30" height="2.31" fill="#fff"/><rect width="15" height="16.15" fill="#3C3B6E"/><circle cx="2.4" cy="2.6" r=".75" fill="#fff"/><circle cx="5.8" cy="2.6" r=".75" fill="#fff"/><circle cx="9.2" cy="2.6" r=".75" fill="#fff"/><circle cx="12.6" cy="2.6" r=".75" fill="#fff"/><circle cx="2.4" cy="6.2" r=".75" fill="#fff"/><circle cx="5.8" cy="6.2" r=".75" fill="#fff"/><circle cx="9.2" cy="6.2" r=".75" fill="#fff"/><circle cx="12.6" cy="6.2" r=".75" fill="#fff"/><circle cx="2.4" cy="9.8" r=".75" fill="#fff"/><circle cx="5.8" cy="9.8" r=".75" fill="#fff"/><circle cx="9.2" cy="9.8" r=".75" fill="#fff"/><circle cx="12.6" cy="9.8" r=".75" fill="#fff"/><circle cx="2.4" cy="13.4" r=".75" fill="#fff"/><circle cx="5.8" cy="13.4" r=".75" fill="#fff"/><circle cx="9.2" cy="13.4" r=".75" fill="#fff"/><circle cx="12.6" cy="13.4" r=".75" fill="#fff"/>',
     de: '<rect width="30" height="10" fill="#000"/><rect y="10" width="30" height="10" fill="#DD0000"/><rect y="20" width="30" height="10" fill="#FFCE00"/>',
     es: '<rect width="30" height="30" fill="#AA151B"/><rect y="7.5" width="30" height="15" fill="#F1BF00"/><rect x="7" y="12" width="4" height="6" rx="1" fill="#AA151B" opacity=".75"/>',
     fr: '<rect width="10" height="30" fill="#0055A4"/><rect x="10" width="10" height="30" fill="#fff"/><rect x="20" width="10" height="30" fill="#EF4135"/>',
@@ -34,7 +35,7 @@
 
   /* ---------- default languages (same set and URLs as medalcapes.com) ---------- */
   const DEFAULT_LANGS = [
-    { code: "en", name: "English", flag: "gb", path: "/" },
+    { code: "en", name: "English", flag: "us", path: "/" },
     { code: "de", name: "Deutsch", flag: "de", path: "/de" },
     { code: "es", name: "Español", flag: "es", path: "/es" },
     { code: "fr", name: "Français", flag: "fr", path: "/fr" },
@@ -112,7 +113,7 @@
     init(o = {}) {
       this.opts = Object.assign({
         languages: DEFAULT_LANGS,
-        current: null,                      // code; default: stored choice, <html lang>, then "en"
+        current: null,                      // language of the current page; default "en"
         title: "Language", suggested: "Suggested", all: "All languages",
         missing: "Missing yours?", helpText: "Help translate", helpHref: "#",
         storageKey: "medal-lang",
@@ -121,8 +122,8 @@
       }, o);
       const L = this.opts.languages;
       L.forEach(l => { l.url = l.url || (this.opts.baseUrl + l.path); });
-      const htmlLang = (document.documentElement.lang || "").slice(0, 2).toLowerCase();
-      const cur = this.opts.current || store.get(this.opts.storageKey) || (L.some(l => l.code === htmlLang) ? htmlLang : "en");
+      // Start in English. A multilingual site passes the language of the current page as `current`.
+      const cur = this.opts.current || "en";
       this.current = L.find(l => l.code === cur) || L[0];
       if (!document.getElementById("ml-css")) { const st = document.createElement("style"); st.id = "ml-css"; st.textContent = CSS; document.head.prepend(st); } // first in <head>, so site themes override the defaults
       this.paintTriggers();

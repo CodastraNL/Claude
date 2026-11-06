@@ -21,7 +21,7 @@ Eén taalkiezer voor alle sites van Medal Network (MedalNetwork, MedalMC, MedalN
   });
 </script>
 ```
-Standaard bevat het onderdeel dezelfde 11 talen en paden als medalcapes.com: `/`, `/de`, `/es`, `/fr`, `/it`, `/nl`, `/pl`, `/pt`, `/ru`, `/tr`, `/zh`. Met `languages: [...]` geef je een eigen lijst mee. De gekozen taal wordt bewaard (`localStorage`), `<html lang>` wordt bijgewerkt en er gaat een event `medal:lang` uit.
+Standaard bevat het onderdeel dezelfde 11 talen en paden als medalcapes.com: `/`, `/de`, `/es`, `/fr`, `/it`, `/nl`, `/pl`, `/pt`, `/ru`, `/tr`, `/zh`. Met `languages: [...]` geef je een eigen lijst mee. Zonder `current` start de kiezer altijd op Engels (met de Amerikaanse vlag). Bij een keuze wordt `<html lang>` bijgewerkt en gaat er een event `medal:lang` uit.
 
 ## Thema
 Stel de kleuren in met CSS-variabelen op `:root`: `--ml-panel`, `--ml-surface`, `--ml-hover`, `--ml-line`, `--ml-text`, `--ml-muted`, `--ml-accent`, `--ml-accent-text`, `--ml-accent-bg`, `--ml-radius`, `--ml-font`. Het onderdeel laadt zijn eigen stijl als eerste in `<head>`, zodat het thema van de site altijd voorgaat.
