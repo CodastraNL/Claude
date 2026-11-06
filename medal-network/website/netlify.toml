@@ -1,0 +1,14 @@
+# MedalNetwork.com demo, Netlify config
+[build]
+  publish = "."
+
+# Demo: keep it out of search engines until launch
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Demo phase: always check for a newer version, so every deploy shows immediately
+    Cache-Control = "no-cache, must-revalidate"
