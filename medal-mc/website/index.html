@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=3">
+<link rel="stylesheet" href="assets/styles.css?v=4">
 </head>
 <body>
 
@@ -36,6 +36,7 @@
       <li><a href="#community">Community</a></li>
     </ul>
     <div class="nav__cta">
+      <button data-medal-lang="compact"></button>
       <a class="btn btn-ghost btn-sm" href="#community">Discord</a>
       <button class="btn btn-gold btn-sm" type="button" data-copy-ip>Play now</button>
       <button class="burger" id="burger" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -339,5 +340,13 @@
 
 <div class="toast" id="toast" role="status"></div>
 <script src="assets/app.js?v=3"></script>
+<script src="assets/medal-lang.js?v=2"></script>
+<script>
+  MedalLang.init({
+    helpHref: "#community",
+    onSelect: l => { const t = document.getElementById("toast"); if (!t) return; t.textContent = l.name + " selected. Translations go live at launch (demo)"; t.classList.add("on"); clearTimeout(window.__mlT); window.__mlT = setTimeout(() => t.classList.remove("on"), 2600); }
+  });
+</script>
+
 </body>
 </html>

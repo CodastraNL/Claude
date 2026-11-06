@@ -376,3 +376,9 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
 @media (max-width:1100px){.brands,.pillars{grid-template-columns:1fr 1fr}.about,.partner{grid-template-columns:1fr}.timeline{grid-template-columns:1fr 1fr;row-gap:28px}.timeline::before{display:none}}
 @media (max-width:720px){.brands,.pillars,.timeline{grid-template-columns:1fr}.stage__medal{width:270px;height:270px}.pform form{grid-template-columns:1fr}.pform{padding:22px}.about__visual{min-height:300px}.orbit--1{width:280px;height:280px}.sat{width:66px;height:66px}.sat img{width:46px;height:46px}.brand--net .wm b{font-size:21px}}
 .pform input,.pform select,.pform textarea{color:var(--ink);font:inherit;font-size:15px}.pform select option{background:var(--bg-2);color:var(--ink)}
+
+/* language picker in the nav on small screens */
+@media (max-width:560px){.nav .wrap{gap:10px}.nav__cta{gap:6px}.nav__cta .ml-trigger{padding:0 7px;gap:0}.nav__cta .ml-trigger .ml-code,.nav__cta .ml-trigger .ml-chev{display:none}}
+@media (max-width:560px){.nav__cta .btn-gold{display:none}}
+html,body{overflow-x:clip}
+@media (max-width:820px){.nav__cta .btn-ghost{display:none}}

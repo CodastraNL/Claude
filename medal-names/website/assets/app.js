@@ -136,6 +136,7 @@
       ${PAGES.map(([href, label, key]) => `<li><a class="nav__link${key === page ? " nav__link--active" : ""}" href="${href}"${key === page ? ' aria-current="page"' : ""}>${label}</a></li>`).join("")}
     </ul>
     <div class="nav__actions">
+      <button data-medal-lang="compact"></button>
       <select class="select" id="currency" aria-label="Currency">
         <option value="EUR"${currency === "EUR" ? " selected" : ""}>€ EUR</option>
         <option value="USD"${currency === "USD" ? " selected" : ""}>$ USD</option>

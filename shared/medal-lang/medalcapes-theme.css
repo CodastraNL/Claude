@@ -1,0 +1,9 @@
+/* Medal language picker: MedalCapes theme (pixel title, green accent, MedalCapes greys) */
+:root{
+  --ml-panel:#15181c; --ml-line:#2e343d; --ml-surface:#1d2127; --ml-hover:#262b33;
+  --ml-accent:#8fe076; --ml-accent-text:#8fe076; --ml-accent-bg:rgba(63,155,42,.14);
+  --ml-radius:10px; --ml-font:"Inter",system-ui,sans-serif;
+}
+.ml-head h2{font-family:"Press Start 2P",monospace;font-size:15px;letter-spacing:.02em}
+.ml-label{font-family:"Press Start 2P",monospace;font-size:9px;letter-spacing:.1em}
+.ml-trigger{border-radius:2px;border:2px solid #3a414c;background:#15181c}
