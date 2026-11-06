@@ -164,6 +164,7 @@
         <div class="footer__family">
           <a class="badge badge-gold" href="https://medalcapes.com">MedalCapes</a>
           <a class="badge badge-green" href="https://medalmc.com">MedalMC</a>
+          <a class="badge badge-gold" href="https://medalnetwork.com">Medal Network</a>
         </div>
       </div>
       <div><h4>Shop</h4><ul><li><a href="names.html">All names</a></li><li><a href="accounts.html">All accounts</a></li><li><a href="names.html#request">Request a name</a></li><li><a href="index.html#drop">Weekly drop</a></li></ul></div>
@@ -176,7 +177,7 @@
         Minecraft is a trademark of Mojang AB. Demo site: prices and stock are examples.<br>
         © 2026 Medal Names. Payments secured by Mollie and Stripe.
       </div>
-      <div style="display:inline-flex;align-items:center;gap:8px"><img src="assets/network-icon.svg" alt="" width="22" height="22">A Medal Network brand · Made by <a href="https://codastra.nl">Codastra</a></div>
+      <div style="display:inline-flex;align-items:center;gap:8px"><img src="assets/network-icon.svg" alt="" width="22" height="22"><a href="https://medalnetwork.com" style="text-decoration:none;color:inherit">A Medal Network brand</a> · Made by <a href="https://codastra.nl">Codastra</a></div>
     </div>
   </div>
 </footer>
@@ -392,4 +393,14 @@
   checker(); forms(); renderCart();
   // honour #hash after dynamic content rendered
   if (location.hash) { const el = document.querySelector(location.hash); if (el) setTimeout(() => el.scrollIntoView(), 50); }
+})();
+
+/* Demo: while running on *.netlify.app, point Medal domains at their demo sites. On the real domains nothing changes. */
+(function () {
+  if (!/\.netlify\.app$/.test(location.hostname)) return;
+  const map = { "medalmc.com": "medalmc-demo.netlify.app", "medalnames.com": "medalnames-demo.netlify.app", "medalnetwork.com": "medalnetwork-demo.netlify.app" };
+  document.querySelectorAll('a[href^="https://"]').forEach(a => {
+    const u = new URL(a.href), h = u.hostname.replace(/^www\./, "");
+    if (map[h]) { u.hostname = map[h]; a.href = u.toString(); }
+  });
 })();

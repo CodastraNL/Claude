@@ -54,3 +54,13 @@
     size(); addEventListener("resize", size); requestAnimationFrame(frame);
   }
 })();
+
+/* Demo: while running on *.netlify.app, point Medal domains at their demo sites. On the real domains nothing changes. */
+(function () {
+  if (!/\.netlify\.app$/.test(location.hostname)) return;
+  const map = { "medalmc.com": "medalmc-demo.netlify.app", "medalnames.com": "medalnames-demo.netlify.app", "medalnetwork.com": "medalnetwork-demo.netlify.app" };
+  document.querySelectorAll('a[href^="https://"]').forEach(a => {
+    const u = new URL(a.href), h = u.hostname.replace(/^www\./, "");
+    if (map[h]) { u.hostname = map[h]; a.href = u.toString(); }
+  });
+})();

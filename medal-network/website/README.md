@@ -21,4 +21,4 @@ Het is een statische site zonder build-stap. Hij gebruikt dezelfde stijl als de 
 | medalnames.com | `medal-names/website` (`medalnames-demo`) |
 | medalcapes.com | de bestaande productiesite (`mc-capes-store`) |
 
-De links naar MedalMC en MedalNames wijzen nu nog naar de demo-adressen. Zet ze om naar de echte domeinen zodra die gekoppeld zijn.
+De links tussen de merken wijzen naar de echte domeinen. Zolang een site op `*.netlify.app` draait, zet een klein script onderaan `assets/app.js` die links om naar de demo-adressen. Op de echte domeinen verandert er niets, dus na het koppelen is geen nieuwe deploy nodig.
