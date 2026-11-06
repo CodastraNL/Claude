@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Names | Medal Names</title>
+<meta name="description" content="OG, 3-letter, 4-letter and dictionary Minecraft usernames on full access accounts. Instant delivery.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="names">
+<div id="site-header"></div>
+
+<main>
+  <section class="page-head">
+    <div class="wrap page-head__inner">
+      <div>
+        <div class="crumbs"><a href="index.html">Home</a> / Names</div>
+        <p class="eyebrow">Names</p>
+        <h1 class="h-pixel">Rare usernames</h1>
+        <p class="lead">3-letter OG, 4-letter and dictionary names. Every name comes on a verified full access account, so the name is yours the moment you change the email.</p>
+      </div>
+      <div class="page-head__art" aria-hidden="true">
+        <div class="nametag">Ace</div>
+        <svg class="js-slime"></svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap checker checker--inline">
+    <div class="card checker__box">
+      <p class="checker__title">Looking for<br>one name?</p>
+      <form id="checkForm" autocomplete="off">
+        <input class="input" id="checkInput" maxlength="16" placeholder="Type a name, e.g. Frost" aria-label="Minecraft name">
+        <button class="btn btn-sky btn-lg" type="submit">Check</button>
+      </form>
+      <div class="checker__result" id="checkResult"></div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="toolbar">
+        <div class="filters" id="filters">
+          <button class="chip on" data-f="all" type="button">All</button>
+          <button class="chip" data-f="og" type="button">3 chars</button>
+          <button class="chip" data-f="4c" type="button">4 chars</button>
+          <button class="chip" data-f="word" type="button">Words</button>
+          <button class="chip" data-f="cape" type="button">+ Cape</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="result-count" id="count"></span>
+          <select class="select" id="sort" aria-label="Sort">
+            <option value="featured">Featured</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+            <option value="short">Shortest first</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="notice">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8fe076" stroke-width="2" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+        <div><b>VERIFIED ACCOUNTS, NO RECOVERY RISK</b><p>Every account is checked before listing: original owner, no bans, email changeable. Payment protected by Mollie and Stripe.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="request" style="padding-top:0">
+    <div class="wrap">
+      <div class="card request">
+        <div>
+          <p class="eyebrow" style="color:var(--sky)">Custom request</p>
+          <h2 class="h-pixel">Want a specific name?</h2>
+          <p class="muted" style="margin:0">Not in stock? Tell us the name and your budget. We track it and contact you on Discord or email as soon as we can get it. No payment until we deliver.</p>
+        </div>
+        <form class="form" data-demo="Request sent! We will contact you (demo)">
+          <label>Name<input id="reqName" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" placeholder="e.g. Frost" required></label>
+          <label>Budget<select><option>Up to $50</option><option>$50 to $150</option><option>$150 to $500</option><option>$500+</option></select></label>
+          <label class="full">Email or Discord<input placeholder="you@example.com or @username" required></label>
+          <button class="btn btn-primary btn-block full" type="submit">Send request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/app.js"></script>
+</body>
+</html>
