@@ -1,11 +1,26 @@
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
-const [,,dir,out]=process.argv; fs.mkdirSync(out,{recursive:true});
-const jobs=[['medalmc-logo.svg','medalmc-logo.png',1],['medalmc-logo.svg','medalmc-logo@2x.png',2],
-['medalmc-logo-horizontal.svg','medalmc-logo-horizontal.png',1],['medalmc-logo-horizontal.svg','medalmc-logo-horizontal@2x.png',2],
-['medalmc-icon.svg','medalmc-icon-512.png',1],['medalmc-icon-dark.svg','medalmc-icon-dark-512.png',1],['server-icon.svg','server-icon.png',1]];
-(async()=>{const b=await chromium.launch();
-for(const [src,dst,scale] of jobs){const svg=fs.readFileSync(path.join(dir,src),'utf8');const m=svg.match(/width="(\d+)" height="(\d+)"/);
-const p=await b.newPage({viewport:{width:+m[1],height:+m[2]},deviceScaleFactor:scale});
-await p.setContent(`<html><body style="margin:0;background:transparent">${svg}</body></html>`);
-await p.screenshot({path:path.join(out,dst),omitBackground:true,clip:{x:0,y:0,width:+m[1],height:+m[2]}});await p.close();console.log(dst,m[1]*scale+'x'+m[2]*scale);}
-await b.close();})();
+// Render every SVG in ../<brand>/svg to PNG in ../<brand>/png (logos at 1x and 2x).
+const { chromium } = require('playwright');
+const fs = require('fs'), path = require('path');
+const ROOT = path.resolve(process.argv[2] || '..');
+(async () => {
+  const b = await chromium.launch();
+  for (const brand of fs.readdirSync(ROOT)) {
+    const svgDir = path.join(ROOT, brand, 'svg');
+    if (!fs.existsSync(svgDir)) continue;
+    const pngDir = path.join(ROOT, brand, 'png'); fs.mkdirSync(pngDir, { recursive: true });
+    for (const f of fs.readdirSync(svgDir).filter(f => f.endsWith('.svg'))) {
+      const svg = fs.readFileSync(path.join(svgDir, f), 'utf8');
+      const [, w, h] = svg.match(/<svg[^>]*width="(\d+)" height="(\d+)"/);
+      const scales = f.includes('-logo') ? [1, 2] : [1];
+      for (const sc of scales) {
+        const p = await b.newPage({ viewport: { width: +w, height: +h }, deviceScaleFactor: sc });
+        await p.setContent(`<html><body style="margin:0;background:transparent">${svg}</body></html>`);
+        const name = f.replace('.svg', '').replace('-icon', f.includes('server') ? '-icon' : '-icon-512') + (sc === 2 ? '@2x' : '') + '.png';
+        await p.screenshot({ path: path.join(pngDir, name), omitBackground: true, clip: { x: 0, y: 0, width: +w, height: +h } });
+        await p.close();
+        console.log(brand, name, w * sc + 'x' + h * sc);
+      }
+    }
+  }
+  await b.close();
+})();

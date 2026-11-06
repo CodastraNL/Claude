@@ -104,7 +104,7 @@
       desc: "Fresh account with the rare black TikTok Cape.",
       feats: ["TikTok Cape active", "Name change available", "Java & Bedrock"] },
     { id: "a-vip", title: "MedalMC VIP account", cat: "bundle", extras: ["vip"], stock: 25, art: "slime", tag: "VIP",
-      desc: "Fresh account with a lifetime VIP rank on MedalMC Network.",
+      desc: "Fresh account with a lifetime VIP rank on MedalMC.",
       feats: ["Lifetime VIP on play.medalmc.com", "Name change available", "Java & Bedrock"] },
     { id: "a-starter", title: "Starter bundle", cat: "bundle", extras: ["hero", "vip"], stock: 15, art: "capes/hero-cape.png",
       desc: "Account with Hero Cape plus lifetime MedalMC VIP. The full Medal package.",
@@ -176,7 +176,7 @@
         Minecraft is a trademark of Mojang AB. Demo site: prices and stock are examples.<br>
         © 2026 Medal Names. Payments secured by Mollie and Stripe.
       </div>
-      <div>Made by <a href="https://codastra.nl">Codastra</a></div>
+      <div style="display:inline-flex;align-items:center;gap:8px"><img src="assets/network-icon.svg" alt="" width="22" height="22">A Medal Network brand · Made by <a href="https://codastra.nl">Codastra</a></div>
     </div>
   </div>
 </footer>

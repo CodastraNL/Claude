@@ -1,61 +1,42 @@
-# MedalMC Network: branding
+# Medal Network: brand kit
 
-Een uitbreiding van [MedalCapes](https://medalcapes.com) naar een Minecraft-servernetwerk (hub + HCF, BedWars, KitPvP en later meer). Een project van Codastra.
+Eén visueel systeem voor alle merken van Medal Network, een project van Codastra.
 
-![MedalMC logo](png/medalmc-logo.png)
+![Merkstructuur](medal-network-brand-overview.png)
 
-## Naam
+| Merk | Waarvoor | Kleur | Element |
+|---|---|---|---|
+| **Medal Network** | Overkoepelend merk | Goud + de drie merkkleuren | Gouden pixel-medaille met de slime, een lint in drie kleuren en een lauwerkrans. Ondertitel op een trofee-plaquette: NETWORK |
+| **MedalMC** | Minecraft-servers (HCF, BedWars, KitPvP) | Groen | Slime met gekruiste zwaarden en een groen lint: SERVERS |
+| **MedalCapes** | Cape-codes | Goud | Het bestaande logo van medalcapes.com (`capes/png`) |
+| **MedalNames** | Namen en accounts | Blauw | Slime met een zwevend in-game naamplaatje en een blauw lint: NAMES & ACCOUNTS |
 
-**MedalMC** (voluit *MedalMC Network*)
+**Gedeeld door alle merken:**
+- **Mascotte:** de gekroonde slime van MedalCapes.
+- **Wordmark:** "MEDAL" in Fredoka Bold met een gouden verloop.
+- **Pixel-elementen:** de sparkles en Press Start 2P.
 
-- "Medal" blijft herkenbaar, zodat MedalCapes en de server één merk vormen.
-- "MC" is de gebruikelijke Minecraft-serverconventie, kort en makkelijk te typen als IP, bijvoorbeeld `play.medalmc.net`.
-- Alleen "Medal" ligt dicht bij Medal.tv, een groot clip-platform voor gamers. "MedalMC" maakt het onderscheid duidelijker.
-- Gebruik geen "Minecraft" in de naam. Dat staat in de richtlijnen van Mojang. "MC" wordt algemeen geaccepteerd.
+Het lint van de Network-medaille bevat de kleuren van de drie merken: groen (MC), goud (Capes) en blauw (Names).
 
-Alternatieven die zijn overwogen: *Medal Network* (`play.medal.network`), *MedalCraft*, *MedalPvP* (te smal als er later niet-PvP-modi bijkomen).
+## Bestanden
+Per merk (`network/`, `mc/`, `names/`):
+- `svg/`: het staande logo, het horizontale logo, een transparant icoon en een icoon op een donkere achtergrond. De tekst is omgezet naar paden.
+- `png/`: dezelfde bestanden als PNG, de logo's ook in `@2x`.
+- `mc/png/server-icon.png`: de Minecraft server-icon (64×64) voor de map van je proxy.
 
-> Controleer vóór de lancering of het domein vrij is (bijvoorbeeld `medalmc.net`, `.com`, `.gg`) en of de handles op Discord, TikTok en X vrij zijn.
-
-## Logo
-
-Het logo hoort duidelijk bij MedalCapes:
-
-- dezelfde pixel-slime met gouden kroon (pixel voor pixel gelijk aan de favicon van medalcapes.com);
-- **gekruiste zwaarden** erachter voor het PvP-netwerk, in de vorm van een wapenschild;
-- dezelfde wordmark-letter: **Fredoka Bold**, met een gouden verloop. "MC" heeft het slime-groen;
-- een pixel-lint met "NETWORK" in **Press Start 2P**, de pixelfont van medalcapes.com;
-- dezelfde gouden sparkles als in het MedalCapes-logo.
-
-| Bestand | Gebruik |
+## Kleuren
+| | Hex |
 |---|---|
-| `png/medalmc-logo.png` / `@2x` | Hoofdlogo: website, store, trailers |
-| `png/medalmc-logo-horizontal.png` / `@2x` | Navigatiebalk, banners, Discord-header |
-| `png/medalmc-icon-512.png` | Mascotte-icoon (transparant) |
-| `png/medalmc-icon-dark-512.png` | Discord-servericoon, social media-avatars |
-| `png/server-icon.png` | **Minecraft server-icon (64×64)**. Zet het in de hoofdmap van de proxy (Velocity of BungeeCord) |
-| `svg/*.svg` | Vectorversies (tekst omgezet naar paden, geen fonts nodig) |
-
-### Kleuren
-
-| Naam | Hex |
-|---|---|
-| Goud | `#ffc21a` (verloop `#ffd23a` → `#f7a51c`) |
-| Oranje | `#f5981f` |
-| Slime licht | `#a8d15c` |
-| Slime midden | `#5cb43a` |
-| Slime donker / lint | `#1f7a3e` |
-| Highlight | `#fff59d` |
-| Achtergrond donker | `#120800` |
-
-Kleurcodes voor MOTD en chat: `&6` (goud) voor "Medal", `&a` (groen) voor "MC".
+| Goud | `#ffc21a`, verloop `#ffd23a` → `#f7a51c` |
+| MC-groen | `#5cb43a`, lint `#1f7a3e` |
+| Names-blauw | `#5ec5e8`, lint `#1b6fa0` |
+| Slime | `#a8d15c` / `#5cb43a` / `#1f7a3e` |
+| Donker | `#0b0e13` / `#1b2128` |
 
 ## Opnieuw genereren
-
 ```bash
 cd source
-npm install
-npm run build   # schrijft ../svg en ../png (voor PNG-export is Playwright nodig)
+npm install opentype.js @fontsource/fredoka @fontsource/press-start-2p playwright
+npm run build
 ```
-
-Pas `make.js` aan voor andere teksten of varianten, bijvoorbeeld een lint met "HCF", "BEDWARS" of "KITPVP" per gamemode: `ribbon(cx, top, s, 'HCF')`.
+Teksten pas je aan in `BRANDS` in `make.js`, bijvoorbeeld het lint "SERVERS" of "NAMES & ACCOUNTS".
