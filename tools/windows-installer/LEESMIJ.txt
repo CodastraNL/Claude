@@ -1,0 +1,21 @@
+MEDAL NETWORK - bestanden
+=========================
+
+1. Pak deze zip helemaal uit (rechtermuisknop > Alles uitpakken).
+2. Dubbelklik op "Installeer.bat".
+   - Alles komt in: C:\Users\alphe\Documents\Codastra\Medal Network
+   - Daarna zoekt het script je oude MedalCapes-map (bijv. "minecraft-capes")
+     en vraagt het welke map het is en of hij verplaatst mag worden
+     naar Medal Network\MedalCapes\Website. Er wordt niets verwijderd.
+
+Waarschuwt Windows ("Windows heeft uw pc beveiligd")? Klik op "Meer informatie" > "Toch uitvoeren".
+
+Mappen
+------
+MedalNetwork\  Logo (svg + png), Website (demo), Brand kit (overzicht + generator)
+MedalMC\       Logo (svg + png, incl. server-icon 64x64), Website (demo)
+MedalNames\    Logo (svg + png), Website (demo)
+MedalCapes\    Logo, Taal- en valutakiezer (+ previews), Cape-afbeeldingen,
+               Website (= je oude MedalCapes-map, na het verplaatsen)
+
+Made by Codastra.
