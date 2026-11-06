@@ -1,0 +1,13 @@
+{
+  "name": "medalmc-branding",
+  "private": true,
+  "description": "Generator voor het MedalMC Network logo (Codastra)",
+  "scripts": {
+    "build": "node make.js ../svg && node export.js ../svg ../png"
+  },
+  "dependencies": {
+    "opentype.js": "1.3.4",
+    "@fontsource/fredoka": "5.0.0",
+    "@fontsource/press-start-2p": "5.0.0"
+  }
+}
