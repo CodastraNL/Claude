@@ -346,3 +346,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .footer .nav__brand svg{width:30px;height:30px}
 @media (max-width:560px){.nav__brand svg{width:32px;height:32px}}
 .show__art .pcard__tag{max-width:none}
+
+/* language + currency pickers in the nav on small screens */
+@media (max-width:560px){.nav__actions{gap:2px}.nav__actions .ml-trigger{padding:0 7px;gap:0;height:38px}.nav__actions .ml-trigger .ml-code,.nav__actions .ml-trigger .ml-chev{display:none}.nav__discord{display:none!important}}

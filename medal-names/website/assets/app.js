@@ -117,9 +117,10 @@
 
   /* ---------- currency ---------- */
   // prices are stored in EUR; USD uses the same rate as MedalCapes
-  let currency = store.get("mn-currency2", "EUR");
-  const RATE = { EUR: 1, USD: 1.10 }, SYM = { USD: "US$", EUR: "€" };
-  const fmt = v => SYM[currency] + (v * RATE[currency]).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // prices are stored in EUR; demo rates (USD uses the same x1.10 as MedalCapes)
+  const RATE = { EUR: 1, USD: 1.10, GBP: 0.86, PLN: 4.30, TRY: 38.5 };
+  let currency = (() => { try { const c = localStorage.getItem("medal-currency"); return RATE[c] ? c : "EUR"; } catch (e) { return "EUR"; } })();
+  const fmt = v => new Intl.NumberFormat("en-US", { style: "currency", currency, currencyDisplay: "narrowSymbol" }).format(v * RATE[currency]);
   const kfmt = v => v >= 1000 ? (v / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(v);
 
   /* ---------- header / footer ---------- */
@@ -137,10 +138,7 @@
     </ul>
     <div class="nav__actions">
       <button data-medal-lang="compact"></button>
-      <select class="select" id="currency" aria-label="Currency">
-        <option value="EUR"${currency === "EUR" ? " selected" : ""}>€ EUR</option>
-        <option value="USD"${currency === "USD" ? " selected" : ""}>$ USD</option>
-      </select>
+      <button data-medal-currency="compact"></button>
       <a class="nav__icon nav__discord" href="#" aria-label="Discord">${discordIcon()}</a>
       <a class="nav__icon" href="#" data-toast="Sign in is coming soon (demo)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span class="nav__label">Sign in</span></a>
       <button class="nav__icon" id="cartBtn" type="button">${CART_ICON.replace('width="18" height="18"', 'width="20" height="20"')}<span class="nav__label">Cart</span><span class="cart-count" id="cartCount">0</span></button>
@@ -283,8 +281,9 @@
   document.getElementById("burger").onclick = () => document.getElementById("nav").classList.toggle("nav-open");
 
   const rerender = [];
-  document.getElementById("currency").addEventListener("change", e => {
-    currency = e.target.value; store.set("mn-currency2", currency);
+  document.addEventListener("medal:currency", e => {
+    if (!RATE[e.detail.code]) return;
+    currency = e.detail.code;
     renderCart(); rerender.forEach(f => f());
     document.querySelectorAll("[data-price]").forEach(el => el.textContent = fmt(+el.dataset.price));
   });
