@@ -1,0 +1,84 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Mono;src:url(Monocraft.ttf)}
+@font-face{font-family:MonoB;src:url(Monocraft-Bold.ttf)}
+@font-face{font-family:Fred;src:url(fredoka-700.woff)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:2000px;height:667px;background:#161616;overflow:hidden}
+#bg{position:absolute;inset:0}
+.vig{position:absolute;inset:0;background:radial-gradient(120% 140% at 45% 50%,transparent 45%,rgba(0,0,0,.55) 100%)}
+
+/* ---------- logo ---------- */
+.logo{position:absolute;left:22px;top:110px;width:420px;height:400px;z-index:1;isolation:isolate}
+.logo .icon{position:absolute;left:40px;top:0;width:340px;height:334px;
+  filter:drop-shadow(0 0 2px #0e3d17) drop-shadow(0 0 14px rgba(84,214,60,.55))}
+.word{position:absolute;left:0;right:0;top:262px;text-align:center;font-family:Fred;font-size:76px;letter-spacing:0;line-height:1;white-space:nowrap}
+.word span{position:relative;display:inline-block}
+.word span::before{content:attr(data-t);position:absolute;left:0;top:0;z-index:-1;
+  -webkit-text-stroke:14px #11331a;color:#11331a;
+  text-shadow:0 4px 0 #11331a,0 8px 0 #11331a,0 12px 0 #0b2411,0 0 22px rgba(80,220,60,.75),0 0 40px rgba(80,220,60,.35)}
+.word .g{background:linear-gradient(#ffe066 0%,#ffc21a 45%,#f39a1c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.word .m{background:linear-gradient(#b4f05a 0%,#6cc93a 50%,#3f9f2a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.word .g::before,.word .m::before{background:none}
+.spark{position:absolute;width:30px;height:30px}
+.spark::before,.spark::after{content:"";position:absolute;background:#ffc21a;box-shadow:0 0 8px rgba(255,194,26,.7)}
+.spark::before{left:12px;top:0;width:6px;height:30px}
+.spark::after{left:0;top:12px;width:30px;height:6px}
+.spark.s{transform:scale(.65)}
+
+/* ---------- MOTD ---------- */
+.t{position:absolute;white-space:nowrap;font-family:Mono;line-height:1}
+.sh{text-shadow:6px 6px 0 rgba(0,0,0,.55)}
+.name{left:486px;top:196px;font-size:76px;color:#f2f2f2}
+.count{right:156px;top:196px;font-size:76px;color:#a9a9a9}
+.count b{font-weight:normal;color:#e8e8e8}
+.bars{position:absolute;right:46px;top:190px;width:92px;height:80px;display:flex;align-items:flex-end;gap:6px;filter:drop-shadow(0 0 10px rgba(60,220,60,.45))}
+.bars i{display:block;width:14px;background:#3fd43a;box-shadow:inset -4px -4px 0 #1f9a22,5px 5px 0 rgba(0,0,0,.55)}
+.l2{left:486px;top:310px;font-size:66px;color:#b9b9b9;display:flex;align-items:center}
+.l3{left:486px;top:410px;font-size:72px;color:#b9b9b9;display:flex;align-items:center}
+.tri{width:0;height:0;border-top:26px solid transparent;border-bottom:26px solid transparent;border-left:44px solid #3fbf3a;margin:0 52px 0 6px;filter:drop-shadow(5px 5px 0 rgba(0,0,0,.55)) drop-shadow(0 0 8px rgba(63,191,58,.6))}
+.brand{font-family:MonoB;font-size:74px;letter-spacing:2px}
+.gold{color:#ffc21a;text-shadow:6px 6px 0 #4a3606,0 0 18px rgba(255,194,26,.35)}
+.grn{color:#62d93f;text-shadow:6px 6px 0 #173d10,0 0 18px rgba(98,217,63,.35)}
+.pipe{color:#6c6c6c;margin:0 20px}
+.dot{display:inline-block;width:14px;height:14px;background:#3fd43a;margin:0 24px;box-shadow:4px 4px 0 rgba(0,0,0,.55),0 0 8px rgba(63,212,58,.6)}
+.dot.y{background:#d8e06a;box-shadow:4px 4px 0 rgba(0,0,0,.55)}
+.star{width:56px;height:56px;margin:0 46px 0 0;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.5)) drop-shadow(0 0 10px rgba(255,194,26,.55))}
+.join{color:#4ee03a;text-shadow:6px 6px 0 #133a0f}
+.ip{color:#c9c9c9}
+</style></head>
+<body>
+<canvas id="bg" width="2000" height="667"></canvas>
+<div class="vig"></div>
+
+<div class="logo">
+  <svg class="icon" viewBox="88 104 336 330"><use href="#ic"/></svg>
+  <span class="spark" style="left:4px;top:110px"></span>
+  <span class="spark s" style="left:380px;top:70px"></span>
+  <span class="spark s" style="left:14px;top:226px"></span>
+  <span class="spark s" style="left:386px;top:220px"></span>
+  <div class="word"><span class="g" data-t="MEDAL">MEDAL</span><span class="m" data-t="MC">MC</span></div>
+</div>
+
+<div class="t sh name">MedalMC</div>
+<div class="t sh count"><b>1284</b>/5000</div>
+<div class="bars"><i style="height:20%"></i><i style="height:40%"></i><i style="height:60%"></i><i style="height:80%"></i><i style="height:100%"></i></div>
+
+<div class="t l2"><span class="tri"></span><span class="brand gold">MEDAL</span><span class="brand grn">MC</span><span class="pipe sh">|</span><span class="sh">HCF</span><span class="dot"></span><span class="sh">BEDWARS</span><span class="dot"></span><span class="sh">KITPVP</span></div>
+
+<div class="t l3"><svg class="star" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#ffc21a" d="M7 0h2v3h1v2h1v1h2v1h3v2h-3v1h-2v1h-1v2H9v3H7v-3H6v-2H5v-1H3V9H0V7h3V6h2V5h1V3h1z"/><path fill="#fff1a8" d="M7 4h1v3H7zM5 7h2v1H5z"/></svg><span class="join">Join now!</span><span class="dot y"></span><span class="ip sh">play.medalmc.com</span></div>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="ic">ICON</g></defs></svg>
+
+<script>
+// dark "stone" pixel background, deterministic
+const c=document.getElementById('bg'),x=c.getContext('2d');
+let s=7;const r=()=>(s=(s*16807)%2147483647)/2147483647;
+const C=46;
+for(let gy=0;gy<Math.ceil(667/C);gy++)for(let gx=0;gx<Math.ceil(2000/C);gx++){
+  const v=20+Math.floor(r()*13);x.fillStyle=`rgb(${v},${v},${v})`;x.fillRect(gx*C,gy*C,C,C);
+  if(r()<.35){const w=v+(r()<.5?-4:5);x.fillStyle=`rgb(${w},${w},${w})`;x.fillRect(gx*C+Math.floor(r()*2)*23,gy*C+Math.floor(r()*2)*23,23,23);}
+}
+</script>
+</body></html>
