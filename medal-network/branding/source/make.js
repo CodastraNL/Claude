@@ -121,25 +121,10 @@ function mascotMC() {
   return cv;
 }
 
-// MedalNames: slime + crown with a floating in-game nametag
-const GLYPH = {
-  M: ['X...X', 'XX.XX', 'X.X.X', 'X...X', 'X...X'], E: ['XXX', 'X..', 'XX.', 'X..', 'XXX'],
-  D: ['XXX.', 'X..X', 'X..X', 'X..X', 'XXX.'], A: ['.XX.', 'X..X', 'XXXX', 'X..X', 'X..X'],
-  L: ['X..', 'X..', 'X..', 'X..', 'XXX'],
-};
+// MedalNames: the crowned slime on its own (same mascot as the rest of the family)
 function mascotNames() {
-  const word = 'MEDAL';
-  const textW = [...word].reduce((a, ch) => a + GLYPH[ch][0].length + 1, -1);
-  const plateW = textW + 6, plateH = 9, W = 40, crownY = plateH + 3;
-  const cv = canvas(W, crownY + SLIME.length);
-  const px0 = Math.floor((W - plateW) / 2);
-  for (let y = 0; y < plateH; y++) for (let x = 0; x < plateW; x++) {
-    if ((y === 0 || y === plateH - 1) && (x === 0 || x === plateW - 1)) continue;
-    cv.set(px0 + x, y, (y === 0 || y === plateH - 1 || x === 0 || x === plateW - 1) ? 't' : 'T');
-  }
-  let cx = px0 + 3;
-  for (const ch of word) { GLYPH[ch].forEach((row, y) => [...row].forEach((c, x) => { if (c === 'X') cv.set(cx + x, 2 + y, 'X'); })); cx += GLYPH[ch][0].length + 1; }
-  stamp(cv, SLIME, Math.floor((W - 32) / 2), crownY);
+  const cv = canvas(32, SLIME.length);
+  stamp(cv, SLIME, 0, 0);
   return cv;
 }
 
@@ -297,7 +282,7 @@ const wrap = (w, h, body, bg) => { w = Math.ceil(w); h = Math.ceil(h); return `<
 const BRANDS = {
   network: { mascot: emblemNetwork, parts: [['MEDAL', 'url(#goldRich)']], sub: s => ['plaque', 'NETWORK'], s: 9, size: 230, hS: 6, hSize: 190 },
   mc: { mascot: mascotMC, parts: [['MEDAL', 'url(#gold)'], ['MC', 'url(#green)']], sub: ['ribbon', 'SERVERS', 'green'], s: 10, size: 200, hS: 7, hSize: 170 },
-  names: { mascot: mascotNames, parts: [['MEDAL', 'url(#gold)'], ['NAMES', 'url(#sky)']], sub: ['ribbon', 'NAMES & ACCOUNTS', 'sky'], s: 11, size: 180, hS: 8, hSize: 150 },
+  names: { mascot: mascotNames, parts: [['MEDAL', 'url(#gold)'], ['NAMES', 'url(#sky)']], sub: ['ribbon', 'NAMES & ACCOUNTS', 'sky'], s: 14, size: 180, hS: 9, hSize: 150 },
 };
 function subtitle(b, cx, top, s) {
   const sub = typeof b.sub === 'function' ? b.sub(s) : b.sub;
